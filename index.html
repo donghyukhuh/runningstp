@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>러닝크루 소셜 네트워킹 STP 분석 대시보드</title>
+    <title>국내 러닝크루 유형화 및 포지셔닝 대시보드</title>
     <style>
-        /* 대시보드 테마 및 레이아웃 설정 */
         :root {
             --color-background-primary: #ffffff;
             --color-background-secondary: #f8f9fa;
@@ -15,7 +14,7 @@
             --color-border-secondary: #e0e0e1;
             --color-border-tertiary: #d0d0d1;
             --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-            --border-radius-md: 12px;
+            --border-radius-md: 14px;
         }
 
         body {
@@ -23,151 +22,146 @@
             background-color: var(--color-background-primary);
             color: var(--color-text-primary);
             margin: 0;
-            padding: 20px;
+            padding: 30px;
             display: flex;
             justify-content: center;
+            /* 전반적 글씨 크기 15% 상향 */
+            font-size: 18.4px; 
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1100px; /* 지도 크기 확대를 위해 컨테이너 확장 */
             width: 100%;
             background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
         }
 
         header {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             border-bottom: 1px solid var(--color-border-secondary);
-            padding-bottom: 20px;
+            padding-bottom: 25px;
         }
 
         header h1 {
-            font-size: 24px;
-            margin: 0 0 8px 0;
+            font-size: 32px; /* 15% 상향 */
+            margin: 0 0 12px 0;
             color: #111;
         }
 
         header p {
-            color: var(--color-text-tertiary);
+            color: var(--color-text-secondary);
             margin: 0;
-            font-size: 14px;
+            font-size: 18px; /* 15% 상향 */
         }
 
-        /* 제공된 스타일 소스 시작 */
+        .footer-credit {
+            margin-top: 15px;
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+            font-weight: 500;
+        }
+
+        /* STP 인터랙션 스타일 */
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
         .rc-dot{cursor:pointer;}
-        .stp-meta{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-        .stp-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
-        .stp-name{font-size:15px;font-weight:600;color:var(--color-text-primary);}
-        .stp-cases{font-size:12px;color:var(--color-text-secondary);margin-top:2px;}
-        .stp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px;}
-        .stp-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px;}
-        .stp-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--color-text-tertiary);margin-bottom:7px;}
-        .stp-text{font-size:13px;color:var(--color-text-primary);line-height:1.6;}
-        .hint{text-align:center;padding:32px 0;color:var(--color-text-tertiary);font-size:13px;border:.5px dashed var(--color-border-tertiary);border-radius:var(--border-radius-md); background: var(--color-background-secondary);}
-        .legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;}
-        .leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--color-text-secondary);cursor:pointer; padding: 4px 8px; border-radius: 6px; transition: background 0.2s;}
+        .stp-meta{display:flex;align-items:center;gap:12px;margin-bottom:15px;}
+        .stp-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+        .stp-name { font-size: 20px; font-weight: 700; color: var(--color-text-primary); }
+        .stp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:15px;}
+        .stp-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:20px; border: 1px solid #eee;}
+        .stp-tag{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--color-text-tertiary);margin-bottom:10px;}
+        .stp-text{font-size:15px;color:var(--color-text-primary);line-height:1.7;}
+        .hint{text-align:center;padding:40px 0;color:var(--color-text-tertiary);font-size:16px;border:1px dashed var(--color-border-tertiary);border-radius:var(--border-radius-md); background: var(--color-background-secondary);}
+        .legend{display:flex;flex-wrap:wrap;gap:15px;margin-bottom:20px;}
+        .leg-item{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--color-text-secondary);cursor:pointer; padding: 6px 12px; border-radius: 8px; transition: background 0.2s;}
         .leg-item:hover { background: var(--color-background-secondary); }
-        .leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
-        /* 제공된 스타일 소스 끝 */
+        .leg-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>Global & Local Running Crew STP Map</h1>
-        <p>전략컨설팅 관점의 소셜 러닝크루 유형화 및 포지셔닝 분석</p>
+        <h1>Running Crew Positioning Map</h1>
+        <p>소셜 러닝크루 유형화 및 포지셔닝</p>
+        <div class="footer-credit">제작 : 임팩트브랜딩커뮤니티 (주)로셜리티</div>
     </header>
 
-    <h2 class="sr-only">소셜 네트워킹형 러닝크루 세부 STP 맵 — 6개 크루 비교</h2>
+    <h2 class="sr-only">국내 주요 러닝크루 4대 유형 STP 분석</h2>
     
     <div class="legend" id="legend"></div>
 
-    <svg width="100%" viewBox="0 0 640 350" style="display:block; border: 1px solid var(--color-border-secondary); border-radius: 8px; margin-bottom: 20px;">
+    <!-- SVG 지도 크기 15% 확대 효과를 위해 viewbox 대비 높이 조정 -->
+    <svg width="100%" viewBox="0 0 640 380" style="display:block; border: 1px solid var(--color-border-secondary); border-radius: 12px; margin-bottom: 25px; background: #fff;">
         <!-- quadrant backgrounds -->
-        <rect x="65" y="35" width="250" height="143" rx="4" fill="var(--color-background-secondary)" opacity=".7"/>
-        <rect x="317" y="35" width="258" height="143" rx="4" fill="var(--color-background-secondary)" opacity=".45"/>
-        <rect x="65" y="180" width="250" height="128" rx="4" fill="var(--color-background-secondary)" opacity=".4"/>
-        <rect x="317" y="180" width="258" height="128" rx="4" fill="var(--color-background-secondary)" opacity=".2"/>
+        <rect x="65" y="35" width="250" height="155" rx="6" fill="#f1f3f5" opacity=".8"/>
+        <rect x="317" y="35" width="258" height="155" rx="6" fill="#f1f3f5" opacity=".5"/>
+        <rect x="65" y="192" width="250" height="140" rx="6" fill="#f1f3f5" opacity=".4"/>
+        <rect x="317" y="192" width="258" height="140" rx="6" fill="#f1f3f5" opacity=".2"/>
+        
         <!-- center lines -->
-        <line x1="65" y1="180" x2="575" y2="180" stroke="var(--color-border-secondary)" stroke-width=".8" stroke-dasharray="3 3"/>
-        <line x1="317" y1="35" x2="317" y2="308" stroke="var(--color-border-secondary)" stroke-width=".8" stroke-dasharray="3 3"/>
+        <line x1="65" y1="192" x2="575" y2="192" stroke="#adb5bd" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="317" y1="35" x2="317" y2="332" stroke="#adb5bd" stroke-width="1" stroke-dasharray="4 4"/>
+        
         <!-- quadrant corner labels -->
-        <text x="72" y="52" font-size="10" font-family="var(--font-sans)" fill="var(--color-text-tertiary)">유흥·오락 · 강한 결속</text>
-        <text x="572" y="52" font-size="10" font-family="var(--font-sans)" fill="var(--color-text-tertiary)" text-anchor="end">미션·목적 · 강한 결속</text>
-        <text x="72" y="304" font-size="10" font-family="var(--font-sans)" fill="var(--color-text-tertiary)">유흥·오락 · 느슨한 참여</text>
-        <text x="572" y="304" font-size="10" font-family="var(--font-sans)" fill="var(--color-text-tertiary)" text-anchor="end">미션·목적 · 느슨한 참여</text>
+        <text x="75" y="55" font-size="11" font-weight="600" fill="#868e96">사셜·라이프스타일 (강한 결속)</text>
+        <text x="565" y="55" font-size="11" font-weight="600" fill="#868e96" text-anchor="end">퍼포먼스 지향 (강한 결속)</text>
+        <text x="75" y="325" font-size="11" font-weight="600" fill="#868e96">로컬 콘텐츠 (느슨한 연대)</text>
+        <text x="565" y="325" font-size="11" font-weight="600" fill="#868e96" text-anchor="end">미션·임팩트 (느슨한 연대)</text>
+        
         <!-- axis labels -->
-        <text x="65" y="332" font-size="11" font-family="var(--font-sans)" fill="var(--color-text-tertiary)">← 순수 유흥 / 친목</text>
-        <text x="575" y="332" font-size="11" font-family="var(--font-sans)" fill="var(--color-text-tertiary)" text-anchor="end">미션 / 목적 결합 →</text>
-        <text x="22" y="65" font-size="10" font-family="var(--font-sans)" fill="var(--color-text-tertiary)" text-anchor="middle">↑ 강한</text>
-        <text x="22" y="78" font-size="10" font-family="var(--font-sans)" fill="var(--color-text-tertiary)" text-anchor="middle">결속</text>
-        <text x="22" y="288" font-size="10" font-family="var(--font-sans)" fill="var(--color-text-tertiary)" text-anchor="middle">느슨한</text>
-        <text x="22" y="301" font-size="10" font-family="var(--font-sans)" fill="var(--color-text-tertiary)" text-anchor="middle">참여 ↓</text>
+        <text x="65" y="355" font-size="12" font-weight="bold" fill="#495057">← 재미 / 관계 중심</text>
+        <text x="575" y="355" font-size="12" font-weight="bold" fill="#495057" text-anchor="end">기록 / 미션 중심 →</text>
+        <text x="30" y="70" font-size="11" font-weight="bold" fill="#495057" text-anchor="middle">↑ 강한 결속</text>
+        <text x="30" y="295" font-size="11" font-weight="bold" fill="#495057" text-anchor="middle">느슨한 참여 ↓</text>
+        
         <g id="rc-layer"></g>
     </svg>
 
-    <div id="stp-panel" style="margin-top:16px;">
-        <div class="hint">맵 위의 크루 원형(Circle)을 클릭하면 상세 STP 분석이 표시됩니다.</div>
+    <div id="stp-panel">
+        <div class="hint">포지셔닝 맵 위의 크루 점을 클릭하시면 유형별 상세 STP 전략이 표시됩니다.</div>
     </div>
 </div>
 
 <script>
 const NS='http://www.w3.org/2000/svg';
 
-// 제공된 크루 데이터
+// 국내 4대 유형별 대표 사례 STP 데이터
 const CREWS=[
   {
-    id:'november',name:'November Project',color:'#378ADD',
-    origin:'글로벌 (보스턴 발원)',
-    x:230,y:95,ldy:-16,la:'middle',lt:'November Project',
-    seg:'20–40대 광범위 도시 거주자. 무료 피트니스 경험과 포지티비티 커뮤니티 욕구 동시 보유.',
-    tgt:'소속감·긍정 에너지를 원하는 러너. 낯선 사람을 껴안는 문화에 거부감 없는 개방적 성향.',
-    pos:'"포지티비티와 공짜 운동." 도시 챕터 시스템으로 로컬 정체성을 구축하면서 글로벌 소속감 제공.',
+    id:'performance', name:'PRRC (Seoul)', color:'#E63946',
+    type:'퍼포먼스 지향형',
+    x:480, y:90, ldy:-18, la:'middle', lt:'PRRC 1936',
+    seg:'진지하게 달리기에 몰입하는 상급 러너 및 하이엔드 스포츠 패션 고관여층.',
+    tgt:'단순 완주를 넘어 개인 기록(PB) 갱신을 열망하는 하이 퍼포먼스 러너.',
+    pos:'"전문성과 힙함의 결합." 전문 마라톤 동호회의 기술력과 스트릿 패션 브랜드의 감성을 동시에 제공.'
   },
   {
-    id:'h3',name:'Hash House Harriers',color:'#7F77DD',
-    origin:'글로벌 (말레이시아 발원)',
-    x:118,y:122,ldy:18,la:'start',lt:'Hash House Harriers',
-    seg:'"달리기 문제가 있는 음주 클럽." 진지함을 거부하는 유머·의식 중심 서브컬처.',
-    tgt:'달리기 실력보다 유머 감각이 입장권. 러닝 후 맥주가 진짜 목표인 러너.',
-    pos:'황당한 유머·의식을 진입 장벽으로 활용해 강한 서브컬처 정체성 구축. 아이러니가 핵심.',
+    id:'social', name:'7980 크루', color:'#4361EE',
+    type:'사셜·라이프스타일형',
+    x:180, y:100, ldy:-18, la:'middle', lt:'7980 크루',
+    seg:'러닝을 통한 네트워킹과 뒤풀이, SNS 인증 사진 등 라이프스타일 공유를 중시하는 MZ세대.',
+    tgt:'퇴근 후 혼자 뛰기보다 비슷한 또래와 어울리며 소속감을 느끼고 싶은 직장인 및 학생.',
+    pos:'"달리기는 핑계일 뿐." 러닝을 매개로 강력한 커뮤니티 결속력과 사셜 이벤트를 제공하는 놀이 문화.'
   },
   {
-    id:'goodgym',name:'GoodGym',color:'#1D9E75',
-    origin:'영국',
-    x:492,y:108,ldy:-16,la:'end',lt:'GoodGym',
-    seg:'운동과 사회공헌을 동시에 원하는 영국 도시 거주자. 30–50대 커뮤니티 의식 높은 성인 중심.',
-    tgt:'사회적 목적이 지속 동기가 되는 러너. 봉사 대상자와의 약속이 러닝 이탈 방지 장치.',
-    pos:'"달리면서 세상을 돕는다." 러닝의 의미를 개인 건강에서 사회적 기여로 확장.',
+    id:'local', name:'시티런 (City Run)', color:'#2A9D8F',
+    type:'로컬 콘텐츠형',
+    x:150, y:260, ldy:22, la:'middle', lt:'시티런',
+    seg:'자신이 사는 도심의 숨겨진 골목, 노포, 랜드마크 탐방에 호기심이 많은 탐험가형 러너.',
+    tgt:'단조로운 트랙 러닝에서 벗어나 로컬 브랜딩과 도시 재생의 흔적을 체험하고 싶은 지역 주민.',
+    pos:'"도시를 읽는 달리기." 러닝에 로컬 큐레이션을 결합하여 도시의 새로운 가치를 발견하는 경험 제공.'
   },
   {
-    id:'parkrun',name:'parkrun',color:'#EF9F27',
-    origin:'글로벌 (영국 발원)',
-    x:455,y:255,ldy:18,la:'end',lt:'parkrun',
-    seg:'무료 주1회 5K를 원하는 모든 연령·수준의 러너. 경쟁 제로, 자원봉사자 운영 모델.',
-    tgt:'부담 없이 정기적으로 달리고 싶은 초보·중급 러너. 참가비 없는 접근성 선호.',
-    pos:'"무료, 주1회, 5킬로미터, 누구나." 극도로 낮은 진입 장벽과 글로벌 스탠다드화된 경험.',
-  },
-  {
-    id:'midnight',name:'Midnight Runners Seoul',color:'#D85A30',
-    origin:'서울',
-    x:195,y:188,ldy:18,la:'start',lt:'Midnight Runners Seoul',
-    seg:'심야 소셜 러닝을 원하는 서울 MZ세대. 낮 시간 바쁜 도시인의 야간 네트워킹 욕구 결합.',
-    tgt:'야간 도시 경관을 즐기고 싶은 러너. 새로운 사람을 만나는 것이 주 동기인 세그먼트.',
-    pos:'"밤의 서울을 달린다." 심야·야경 비주얼 차별화와 MZ세대 네트워킹 욕구를 연결.',
-  },
-  {
-    id:'hangang',name:'런비더한강',color:'#D4537E',
-    origin:'서울',
-    x:118,y:258,ldy:18,la:'start',lt:'런비더한강',
-    seg:'한강 인근 거주·직장 캐주얼 러너. 특별한 가입 절차 없이 참여·이탈 자유로운 구조 선호.',
-    tgt:'가끔 같이 달릴 사람이 필요한 러너. 한강이라는 지리적 공유재를 활용하고 싶은 러너.',
-    pos:'"한강에서 가볍게." 강제 없는 자유로운 참여 구조 자체가 포지셔닝 약속. 부담 없음이 핵심.',
-  },
+    id:'impact', name:'션의 기부런 (Plogging)', color:'#F4A261',
+    type:'미션·임팩트형',
+    x:450, y:270, ldy:22, la:'middle', lt:'션의 기부런 / 플로깅',
+    seg:'개인의 건강뿐만 아니라 환경 보호나 기부 등 사회적 가치 실천(Meaning-out)에 적극적인 층.',
+    tgt:'자신의 활동이 세상에 선한 영향력을 끼치길 원하는 '임팩트 지향' 러너 및 가치 소비 세대.',
+    pos:'"달리는 만큼 변화하는 세상." 운동의 에너지를 사회적 자본으로 치환하는 임팩트 브랜딩.'
+  }
 ];
 
 const layer=document.getElementById('rc-layer');
@@ -179,33 +173,32 @@ CREWS.forEach(c=>{
   g.dataset.id=c.id;
 
   const ring=document.createElementNS(NS,'circle');
-  ring.setAttribute('cx',c.x);ring.setAttribute('cy',c.y);ring.setAttribute('r','20');
+  ring.setAttribute('cx',c.x);ring.setAttribute('cy',c.y);ring.setAttribute('r','25');
   ring.setAttribute('fill',c.color);ring.setAttribute('opacity','0');
 
   const dot=document.createElementNS(NS,'circle');
-  dot.setAttribute('cx',c.x);dot.setAttribute('cy',c.y);dot.setAttribute('r','8');
+  dot.setAttribute('cx',c.x);dot.setAttribute('cy',c.y);dot.setAttribute('r','10'); // 점 크기 확대
   dot.setAttribute('fill',c.color);
-  dot.setAttribute('stroke','#fff');dot.setAttribute('stroke-width','1.5');
+  dot.setAttribute('stroke','#fff');dot.setAttribute('stroke-width','2');
 
   const lbl=document.createElementNS(NS,'text');
   lbl.setAttribute('x',c.x);lbl.setAttribute('y',c.y+c.ldy);
   lbl.setAttribute('text-anchor',c.la);
-  lbl.setAttribute('font-size','11');lbl.setAttribute('font-family','var(--font-sans)');
+  lbl.setAttribute('font-size','13'); 
+  lbl.setAttribute('font-weight','700');
   lbl.setAttribute('fill','var(--color-text-secondary)');
   lbl.textContent=c.lt;
 
   g.appendChild(ring);g.appendChild(dot);g.appendChild(lbl);
 
   g.addEventListener('mouseenter',()=>{
-    ring.setAttribute('opacity','0.18');
-    lbl.setAttribute('fill','var(--color-text-primary)');
-    lbl.setAttribute('font-weight','600');
+    ring.setAttribute('opacity','0.2');
+    lbl.setAttribute('fill',c.color);
   });
   g.addEventListener('mouseleave',()=>{
     if(!g.classList.contains('sel')){
       ring.setAttribute('opacity','0');
       lbl.setAttribute('fill','var(--color-text-secondary)');
-      lbl.removeAttribute('font-weight');
     }
   });
   g.addEventListener('click',()=>selectCrew(c.id));
@@ -213,7 +206,7 @@ CREWS.forEach(c=>{
 
   const li=document.createElement('div');
   li.className='leg-item';
-  li.innerHTML=`<div class="leg-dot" style="background:${c.color}"></div><span>${c.lt}</span>`;
+  li.innerHTML=`<div class="leg-dot" style="background:${c.color}"></div><span>${c.type}</span>`;
   li.addEventListener('click',()=>selectCrew(c.id));
   legend.appendChild(li);
 });
@@ -223,21 +216,17 @@ function selectCrew(id){
     g.classList.remove('sel');
     g.querySelector('circle').setAttribute('opacity','0');
     g.querySelector('text').setAttribute('fill','var(--color-text-secondary)');
-    g.querySelector('text').removeAttribute('font-weight');
   });
   const sel=document.querySelector(`[data-id="${id}"]`);
   sel.classList.add('sel');
-  sel.querySelector('circle').setAttribute('opacity','0.22');
-  sel.querySelector('text').setAttribute('fill','var(--color-text-primary)');
-  sel.querySelector('text').setAttribute('font-weight','600');
+  sel.querySelector('circle').setAttribute('opacity','0.3');
+  sel.querySelector('text').setAttribute('fill', CREWS.find(x=>x.id===id).color);
 
   const c=CREWS.find(x=>x.id===id);
   document.getElementById('stp-panel').innerHTML=`
     <div class="stp-meta">
       <div class="stp-dot" style="background:${c.color}"></div>
-      <div>
-        <div class="stp-name">${c.name} <span style="font-size:12px;font-weight:400;color:var(--color-text-tertiary);">${c.origin}</span></div>
-      </div>
+      <div class="stp-name">${c.name} <span style="font-size:14px; color:var(--color-text-tertiary); font-weight:400;">(${c.type})</span></div>
     </div>
     <div class="stp-grid">
       <div class="stp-card"><div class="stp-tag">Segmentation</div><div class="stp-text">${c.seg}</div></div>
