@@ -25,12 +25,11 @@
             padding: 30px;
             display: flex;
             justify-content: center;
-            /* 전반적 글씨 크기 15% 상향 */
             font-size: 18.4px; 
         }
 
         .container {
-            max-width: 1100px; /* 지도 크기 확대를 위해 컨테이너 확장 */
+            max-width: 1100px;
             width: 100%;
             background: white;
             padding: 40px;
@@ -45,7 +44,7 @@
         }
 
         header h1 {
-            font-size: 32px; /* 15% 상향 */
+            font-size: 32px;
             margin: 0 0 12px 0;
             color: #111;
         }
@@ -53,7 +52,7 @@
         header p {
             color: var(--color-text-secondary);
             margin: 0;
-            font-size: 18px; /* 15% 상향 */
+            font-size: 18px;
         }
 
         .footer-credit {
@@ -63,7 +62,6 @@
             font-weight: 500;
         }
 
-        /* STP 인터랙션 스타일 */
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
         .rc-dot{cursor:pointer;}
         .stp-meta{display:flex;align-items:center;gap:12px;margin-bottom:15px;}
@@ -74,10 +72,10 @@
         .stp-tag{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--color-text-tertiary);margin-bottom:10px;}
         .stp-text{font-size:15px;color:var(--color-text-primary);line-height:1.7;}
         .hint{text-align:center;padding:40px 0;color:var(--color-text-tertiary);font-size:16px;border:1px dashed var(--color-border-tertiary);border-radius:var(--border-radius-md); background: var(--color-background-secondary);}
-        .legend{display:flex;flex-wrap:wrap;gap:15px;margin-bottom:20px;}
-        .leg-item{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--color-text-secondary);cursor:pointer; padding: 6px 12px; border-radius: 8px; transition: background 0.2s;}
-        .leg-item:hover { background: var(--color-background-secondary); }
-        .leg-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
+        .legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;}
+        .leg-item{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--color-text-secondary);cursor:pointer; padding: 4px 10px; border: 1px solid #eee; border-radius: 20px; transition: all 0.2s;}
+        .leg-item:hover { background: var(--color-background-secondary); border-color: #ccc; }
+        .leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
     </style>
 </head>
 <body>
@@ -89,31 +87,24 @@
         <div class="footer-credit">제작 : 임팩트브랜딩커뮤니티 (주)로셜리티</div>
     </header>
 
-    <h2 class="sr-only">국내 주요 러닝크루 4대 유형 STP 분석</h2>
-    
     <div class="legend" id="legend"></div>
 
-    <!-- SVG 지도 크기 15% 확대 효과를 위해 viewbox 대비 높이 조정 -->
-    <svg width="100%" viewBox="0 0 640 380" style="display:block; border: 1px solid var(--color-border-secondary); border-radius: 12px; margin-bottom: 25px; background: #fff;">
-        <!-- quadrant backgrounds -->
+    <svg width="100%" viewBox="0 0 640 400" style="display:block; border: 1px solid var(--color-border-secondary); border-radius: 12px; margin-bottom: 25px; background: #fff;">
         <rect x="65" y="35" width="250" height="155" rx="6" fill="#f1f3f5" opacity=".8"/>
         <rect x="317" y="35" width="258" height="155" rx="6" fill="#f1f3f5" opacity=".5"/>
         <rect x="65" y="192" width="250" height="140" rx="6" fill="#f1f3f5" opacity=".4"/>
         <rect x="317" y="192" width="258" height="140" rx="6" fill="#f1f3f5" opacity=".2"/>
         
-        <!-- center lines -->
         <line x1="65" y1="192" x2="575" y2="192" stroke="#adb5bd" stroke-width="1" stroke-dasharray="4 4"/>
         <line x1="317" y1="35" x2="317" y2="332" stroke="#adb5bd" stroke-width="1" stroke-dasharray="4 4"/>
         
-        <!-- quadrant corner labels -->
-        <text x="75" y="55" font-size="11" font-weight="600" fill="#868e96">사셜·라이프스타일 (강한 결속)</text>
-        <text x="565" y="55" font-size="11" font-weight="600" fill="#868e96" text-anchor="end">퍼포먼스 지향 (강한 결속)</text>
-        <text x="75" y="325" font-size="11" font-weight="600" fill="#868e96">로컬 콘텐츠 (느슨한 연대)</text>
-        <text x="565" y="325" font-size="11" font-weight="600" fill="#868e96" text-anchor="end">미션·임팩트 (느슨한 연대)</text>
+        <text x="75" y="55" font-size="10" font-weight="600" fill="#868e96">사셜·라이프스타일 (강한 결속)</text>
+        <text x="565" y="55" font-size="10" font-weight="600" fill="#868e96" text-anchor="end">퍼포먼스 지향 (강한 결속)</text>
+        <text x="75" y="325" font-size="10" font-weight="600" fill="#868e96">로컬 콘텐츠 (느슨한 연대)</text>
+        <text x="565" y="325" font-size="10" font-weight="600" fill="#868e96" text-anchor="end">미션·임팩트 (느슨한 연대)</text>
         
-        <!-- axis labels -->
-        <text x="65" y="355" font-size="12" font-weight="bold" fill="#495057">← 재미 / 관계 중심</text>
-        <text x="575" y="355" font-size="12" font-weight="bold" fill="#495057" text-anchor="end">기록 / 미션 중심 →</text>
+        <text x="65" y="360" font-size="12" font-weight="bold" fill="#495057">← 재미 / 관계 중심</text>
+        <text x="575" y="360" font-size="12" font-weight="bold" fill="#495057" text-anchor="end">기록 / 미션 중심 →</text>
         <text x="30" y="70" font-size="11" font-weight="bold" fill="#495057" text-anchor="middle">↑ 강한 결속</text>
         <text x="30" y="295" font-size="11" font-weight="bold" fill="#495057" text-anchor="middle">느슨한 참여 ↓</text>
         
@@ -121,46 +112,76 @@
     </svg>
 
     <div id="stp-panel">
-        <div class="hint">포지셔닝 맵 위의 크루 점을 클릭하시면 유형별 상세 STP 전략이 표시됩니다.</div>
+        <div class="hint">맵 위의 크루를 클릭하시면 유형별 상세 STP 전략이 표시됩니다.</div>
     </div>
 </div>
 
 <script>
 const NS='http://www.w3.org/2000/svg';
 
-// 국내 4대 유형별 대표 사례 STP 데이터
 const CREWS=[
   {
-    id:'performance', name:'PRRC (Seoul)', color:'#E63946',
-    type:'퍼포먼스 지향형',
-    x:480, y:90, ldy:-18, la:'middle', lt:'PRRC 1936',
+    id:'prrc', name:'PRRC 1936', color:'#E63946', type:'퍼포먼스',
+    x:500, y:80, ldy:-15, la:'middle', lt:'PRRC',
     seg:'진지하게 달리기에 몰입하는 상급 러너 및 하이엔드 스포츠 패션 고관여층.',
-    tgt:'단순 완주를 넘어 개인 기록(PB) 갱신을 열망하는 하이 퍼포먼스 러너.',
-    pos:'"전문성과 힙함의 결합." 전문 마라톤 동호회의 기술력과 스트릿 패션 브랜드의 감성을 동시에 제공.'
+    tgt:'전문성과 스타일을 동시에 추구하며 기록 갱신을 열망하는 하이 퍼포먼스 러너.',
+    pos:'"전문성과 힙함의 결합." 전문 마라톤 동호회의 기술력과 스트릿 패션 감성의 융합.'
   },
   {
-    id:'social', name:'7980 크루', color:'#4361EE',
-    type:'사셜·라이프스타일형',
-    x:180, y:100, ldy:-18, la:'middle', lt:'7980 크루',
-    seg:'러닝을 통한 네트워킹과 뒤풀이, SNS 인증 사진 등 라이프스타일 공유를 중시하는 MZ세대.',
-    tgt:'퇴근 후 혼자 뛰기보다 비슷한 또래와 어울리며 소속감을 느끼고 싶은 직장인 및 학생.',
-    pos:'"달리기는 핑계일 뿐." 러닝을 매개로 강력한 커뮤니티 결속력과 사셜 이벤트를 제공하는 놀이 문화.'
+    id:'kyro', name:'KYRO (카이로)', color:'#E63946', type:'퍼포먼스',
+    x:450, y:130, ldy:20, la:'middle', lt:'KYRO',
+    seg:'데이터 기반의 체계적인 훈련과 엘리트급 러닝 경험을 선호하는 러너.',
+    tgt:'과학적인 트레이닝 방법론을 통해 한계를 극복하려는 성취 지향적 러너.',
+    pos:'"진정성 있는 훈련 공동체." 전문적인 코칭과 데이터 분석을 통한 실력 향상 보장.'
   },
   {
-    id:'local', name:'시티런 (City Run)', color:'#2A9D8F',
-    type:'로컬 콘텐츠형',
-    x:150, y:260, ldy:22, la:'middle', lt:'시티런',
-    seg:'자신이 사는 도심의 숨겨진 골목, 노포, 랜드마크 탐방에 호기심이 많은 탐험가형 러너.',
-    tgt:'단조로운 트랙 러닝에서 벗어나 로컬 브랜딩과 도시 재생의 흔적을 체험하고 싶은 지역 주민.',
-    pos:'"도시를 읽는 달리기." 러닝에 로컬 큐레이션을 결합하여 도시의 새로운 가치를 발견하는 경험 제공.'
+    id:'7980', name:'7980 크루', color:'#4361EE', type:'사셜',
+    x:150, y:80, ldy:-15, la:'middle', lt:'7980',
+    seg:'러닝을 통한 네트워킹과 뒤풀이 등 라이프스타일 공유를 중시하는 MZ세대.',
+    tgt:'또래와 어울리며 소속감을 느끼고 강력한 인간관계를 구축하고 싶은 직장인.',
+    pos:'"달리기는 핑계일 뿐." 강력한 결속력과 사셜 이벤트를 제공하는 놀이 문화.'
   },
   {
-    id:'impact', name:'션의 기부런 (Plogging)', color:'#F4A261',
-    type:'미션·임팩트형',
-    x:450, y:270, ldy:22, la:'middle', lt:'션의 기부런 / 플로깅',
-    seg:'개인의 건강뿐만 아니라 환경 보호나 기부 등 사회적 가치 실천(Meaning-out)에 적극적인 층.',
-    tgt:'자신의 활동이 세상에 선한 영향력을 끼치길 원하는 '임팩트 지향' 러너 및 가치 소비 세대.',
-    pos:'"달리는 만큼 변화하는 세상." 운동의 에너지를 사회적 자본으로 치환하는 임팩트 브랜딩.'
+    id:'crews_ghost', name:'고스트러너', color:'#4361EE', type:'사셜',
+    x:230, y:120, ldy:20, la:'middle', lt:'고스트러너',
+    seg:'온라인 기반의 인증과 오프라인의 힙한 모임을 동시에 즐기는 젊은 러너층.',
+    tgt:'스타일리시한 러닝 라이프를 추구하고 SNS를 통한 기록 공유를 즐기는 이들.',
+    pos:'"가장 힙한 소셜 런." 감각적인 브랜딩과 소셜 경험을 결합한 라이프스타일 크루.'
+  },
+  {
+    id:'jangsu', name:'장수 트레일 레이스', color:'#2A9D8F', type:'로컬',
+    x:120, y:230, ldy:-15, la:'middle', lt:'장수 트레일',
+    seg:'도심을 벗어나 자연과 로컬의 정취를 느끼며 달리고 싶은 트레일 러너.',
+    tgt:'지역의 자연 경관을 체험하고 '장수'라는 로컬 브랜드를 소비하고 싶은 탐험가.',
+    pos:'"로컬과 스포츠의 공존." 지역의 산과 들을 무대로 로컬리티를 극대화한 스포츠 콘텐츠.'
+  },
+  {
+    id:'cityrun', name:'시티런 (City Run)', color:'#2A9D8F', type:'로컬',
+    x:210, y:270, ldy:20, la:'middle', lt:'시티런',
+    seg:'도심의 숨겨진 골목, 노포 탐방에 호기심이 많은 탐험가형 러너.',
+    tgt:'단조로운 트랙 러닝에서 벗어나 로컬 브랜딩의 흔적을 체험하고 싶은 지역 주민.',
+    pos:'"도시를 읽는 달리기." 로컬 큐레이션을 결합하여 도시의 새로운 가치를 발견.'
+  },
+  {
+    id:'sean', name:'션의 기부런', color:'#F4A261', type:'미션',
+    x:520, y:220, ldy:-15, la:'middle', lt:'션의 기부런',
+    seg:'개인의 건강뿐만 아니라 기부 등 사회적 가치 실천에 적극적인 층.',
+    tgt:'자신의 활동이 선한 영향력을 끼치길 원하는 '임팩트 지향' 러너.',
+    pos:'"달리는 만큼 변화하는 세상." 운동 에너지를 사회적 자본으로 치환.'
+  },
+  {
+    id:'plogging', name:'와이퍼스 (플로깅)', color:'#F4A261', type:'미션',
+    x:450, y:280, ldy:20, la:'middle', lt:'플로깅 크루',
+    seg:'환경 문제에 민감하며 건강과 환경 보호를 동시에 실천하려는 에코 러너.',
+    tgt:'느슨한 연대를 통해 환경 정화 활동에 참여하고 성취감을 느끼고 싶은 이들.',
+    pos:'"지구를 닦는 달리기." 환경 보호라는 명확한 미션을 가진 임팩트 공동체.'
+  },
+  {
+    id:'nrc', name:'NRC 서울', color:'#6c757d', type:'기타',
+    x:317, y:192, ldy:-15, la:'middle', lt:'NRC 서울',
+    seg:'글로벌 브랜드의 경험을 선호하는 표준화된 러닝 선호층.',
+    tgt:'브랜드가 제공하는 체계적인 가이드와 신뢰도 높은 모임을 찾는 러너.',
+    pos:'"글로벌 스탠다드 런." 나이키라는 강력한 브랜드 자산을 배경으로 한 표준화된 경험.'
   }
 ];
 
@@ -177,14 +198,14 @@ CREWS.forEach(c=>{
   ring.setAttribute('fill',c.color);ring.setAttribute('opacity','0');
 
   const dot=document.createElementNS(NS,'circle');
-  dot.setAttribute('cx',c.x);dot.setAttribute('cy',c.y);dot.setAttribute('r','10'); // 점 크기 확대
+  dot.setAttribute('cx',c.x);dot.setAttribute('cy',c.y);dot.setAttribute('r','9');
   dot.setAttribute('fill',c.color);
   dot.setAttribute('stroke','#fff');dot.setAttribute('stroke-width','2');
 
   const lbl=document.createElementNS(NS,'text');
   lbl.setAttribute('x',c.x);lbl.setAttribute('y',c.y+c.ldy);
   lbl.setAttribute('text-anchor',c.la);
-  lbl.setAttribute('font-size','13'); 
+  lbl.setAttribute('font-size','12'); 
   lbl.setAttribute('font-weight','700');
   lbl.setAttribute('fill','var(--color-text-secondary)');
   lbl.textContent=c.lt;
@@ -206,7 +227,7 @@ CREWS.forEach(c=>{
 
   const li=document.createElement('div');
   li.className='leg-item';
-  li.innerHTML=`<div class="leg-dot" style="background:${c.color}"></div><span>${c.type}</span>`;
+  li.innerHTML=`<div class="leg-dot" style="background:${c.color}"></div><span>${c.name}</span>`;
   li.addEventListener('click',()=>selectCrew(c.id));
   legend.appendChild(li);
 });
@@ -226,7 +247,7 @@ function selectCrew(id){
   document.getElementById('stp-panel').innerHTML=`
     <div class="stp-meta">
       <div class="stp-dot" style="background:${c.color}"></div>
-      <div class="stp-name">${c.name} <span style="font-size:14px; color:var(--color-text-tertiary); font-weight:400;">(${c.type})</span></div>
+      <div class="stp-name">${c.name} <span style="font-size:14px; color:var(--color-text-tertiary); font-weight:400;">(${c.type} 유형)</span></div>
     </div>
     <div class="stp-grid">
       <div class="stp-card"><div class="stp-tag">Segmentation</div><div class="stp-text">${c.seg}</div></div>
